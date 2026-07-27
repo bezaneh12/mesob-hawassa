@@ -89,6 +89,7 @@ function Navbar({ lang, setLang }) {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/institutions">Institutions</Link></li>
           <li><Link to="/services">Services</Link></li>
+          <li><Link to="/appointment">Appointment</Link></li>
 
           
           <li
@@ -136,7 +137,6 @@ function Navbar({ lang, setLang }) {
         <div className="navbar-controls">
           <div className="lang-switcher">
             {[
-              { key: "both", label: "EN · አማ" },
               { key: "en", label: "EN" },
               { key: "am", label: "አማ" }
             ].map((opt) => (

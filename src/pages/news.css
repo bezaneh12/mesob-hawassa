@@ -1,63 +1,220 @@
+/* ==========================================
+   NEWS PAGE
+========================================== */
+
 .news-page {
   max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
 }
 
+
+/* ==========================================
+   PAGE TITLE
+========================================== */
+
 .news-page h2 {
   text-align: center;
   color: #0b5ed7;
-  margin-bottom: 35px;
+  margin-bottom: 40px;
   font-size: 2rem;
 }
 
+
+/* ==========================================
+   NEWS GRID
+========================================== */
+
 .news-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  gap: 25px;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(320px, 1fr)
+    );
+
+  gap: 30px;
 }
 
+
+/* ==========================================
+   NEWS CARD
+========================================== */
+
 .news-card {
-  background: #fff;
+  background: #ffffff;
+
   border-radius: 12px;
+
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  box-shadow:
+    0 5px 20px
+    rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .news-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  transform:
+    translateY(-5px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.14);
 }
 
-.news-image,
-.news-video {
+
+/* ==========================================
+   NEWS IMAGE
+========================================== */
+
+.news-image {
   width: 100%;
-  max-height: 240px;
-  object-fit: cover;
+
+  height: 230px;
+
+  object-fit: contain;
+  object-position: center;
+
   display: block;
+  background: #f5f7fb;
+  padding: 8px;
+  box-sizing: border-box;
 }
+
+
+/* ==========================================
+   CARD CONTENT
+========================================== */
+
+.news-card-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+
+/* ==========================================
+   NEWS TITLE
+========================================== */
 
 .news-card h3 {
-  margin: 18px 20px 10px;
+  margin: 0 0 15px;
+
   color: #1f2937;
-  font-size: 1.2rem;
+
+  font-size: 1.35rem;
+
+  line-height: 1.5;
 }
 
-.news-card p {
-  margin: 0 20px 15px;
-  color: #555;
-  line-height: 1.7;
-}
 
-.news-card small {
+/* ==========================================
+   NEWS CONTENT
+========================================== */
+
+.news-content {
   display: block;
-  margin: 0 20px 20px;
+
+  margin: 0 0 20px;
+
+  color: #555;
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  flex: 1;
+}
+
+
+/* ==========================================
+   VIDEO
+========================================== */
+
+.news-video {
+  width: 100%;
+
+  max-height: 300px;
+
+  margin-top: 15px;
+
+  border-radius: 8px;
+
+  display: block;
+}
+
+
+/* ==========================================
+   DATE
+========================================== */
+
+.news-date {
+  display: block;
+
+  margin-top: 20px;
+
+  padding-top: 15px;
+
+  border-top:
+    1px solid #eeeeee;
+
   color: #888;
+
   font-size: 0.9rem;
 }
 
+
+/* ==========================================
+   LOADING / EMPTY
+========================================== */
+
+.news-status {
+  text-align: center;
+
+  padding: 40px 20px;
+
+  color: #666;
+
+  font-size: 1rem;
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.news-status.error {
+  color: #dc3545;
+
+  background: #fff5f5;
+
+  border-radius: 8px;
+
+  max-width: 600px;
+
+  margin: 20px auto;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
 @media (max-width: 768px) {
+
   .news-page {
     padding: 15px;
   }
@@ -65,4 +222,30 @@
   .news-grid {
     grid-template-columns: 1fr;
   }
+
+  .news-image {
+    height: 220px;
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 480px) {
+
+  .news-page {
+    margin: 20px auto;
+  }
+
+  .news-image {
+    height: 200px;
+  }
+
+  .news-card-content {
+    padding: 18px;
+  }
+
 }

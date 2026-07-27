@@ -12,7 +12,6 @@ const STATS = [
   { number: "15+",  en: "Gov't services",  am: "የመንግሥት አገልግሎቶች" },
   { number: "1",    en: "Visit needed",    am: "አንድ ጉብኝት ብቻ" },
   { number: "24/7", en: "Online portal",   am: "ኦንላይን ፖርታል" },
-  { number: "100K+",en: "Citizens served", am: "ያገለገልናቸው ዜጎች" },
 ];
 
 const HISTORY = [

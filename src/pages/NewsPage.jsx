@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { apiEndpoints } from "../config/api";
+import { useEffect, useState } from "react";
+import { supabase } from "../supabase";
 import "./news.css";
 
 function NewsPage() {
@@ -8,51 +8,208 @@ function NewsPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(apiEndpoints.news)
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
-      })
-      .then(data => {
-        setPosts(Array.isArray(data) ? data : []);
-        setError(null);
-      })
-      .catch(err => {
-        console.error("Failed to fetch news:", err);
-        setError(err.message);
+    async function loadNews() {
+      setLoading(true);
+      setError(null);
+
+      const { data, error } = await supabase
+        .from("news")
+        .select(
+          `
+          id,
+          title,
+          title_am,
+          content,
+          content_am,
+          image_url,
+          video_url,
+          published_at,
+          is_published,
+          created_at
+          `
+        )
+        .eq("is_published", true)
+        .order("published_at", {
+          ascending: false,
+          nullsFirst: false,
+        })
+        .order("created_at", {
+          ascending: false,
+        });
+
+      if (error) {
+        console.error(
+          "Failed to fetch news:",
+          error
+        );
+
+        setError(error.message);
         setPosts([]);
-      })
-      .finally(() => setLoading(false));
+      } else {
+        setPosts(data || []);
+      }
+
+      setLoading(false);
+    }
+
+    loadNews();
   }, []);
 
-  if (loading) return <div className="news-page"><p>Loading news...</p></div>;
-  if (error) return <div className="news-page"><p className="error">Error loading news: {error}</p></div>;
-  if (!posts.length) return <div className="news-page"><p>No news available at this time.</p></div>;
+  // ==========================================
+  // LOADING
+  // ==========================================
+
+  if (loading) {
+    return (
+      <div className="news-page">
+        <div className="news-status">
+          <p>Loading news...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // ==========================================
+  // ERROR
+  // ==========================================
+
+  if (error) {
+    return (
+      <div className="news-page">
+        <div className="news-status error">
+          <p>
+            Error loading news:
+            <br />
+            {error}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ==========================================
+  // NO NEWS
+  // ==========================================
+
+  if (posts.length === 0) {
+    return (
+      <div className="news-page">
+
+        <h2>
+          Latest News
+        </h2>
+
+        <div className="news-status">
+          <p>
+            No news available at this time.
+          </p>
+        </div>
+
+      </div>
+    );
+  }
+
+  // ==========================================
+  // NEWS PAGE
+  // ==========================================
 
   return (
     <div className="news-page">
-      <h2>Latest News</h2>
+
+      <h2>
+        Latest News
+      </h2>
+
       <div className="news-grid">
-        {posts.map(post => (
-          <div key={post.id} className="news-card">
-            <h3>{post.title}</h3>
-            <p>{post.content}</p>
 
-            {post.image && (
-              <img src={post.image} alt={post.title} className="news-image" />
+        {posts.map((post) => (
+
+          <article
+            key={post.id}
+            className="news-card"
+          >
+
+            {/* =================================
+                IMAGE
+            ================================== */}
+
+            {post.image_url && (
+
+              <img
+                src={post.image_url}
+                alt={post.title}
+                className="news-image"
+              />
+
             )}
 
-            {post.video && (
-              <video controls className="news-video">
-                <source src={post.video} type="video/mp4" />
-              </video>
-            )}
 
-            <small>Posted on: {post.date} by {post.author}</small>
-          </div>
+            {/* =================================
+                CONTENT
+            ================================== */}
+
+            <div className="news-card-content">
+
+              {/* TITLE */}
+
+              <h3>
+                {post.title}
+              </h3>
+
+
+              {/* NEWS CONTENT */}
+
+              <div className="news-content">
+                {post.content ? post.content : "No content available."}
+              </div>
+
+
+              {/* VIDEO */}
+
+              {post.video_url && (
+
+                <video
+                  controls
+                  className="news-video"
+                >
+
+                  <source
+                    src={post.video_url}
+                    type="video/mp4"
+                  />
+
+                  Your browser does not support
+                  video playback.
+
+                </video>
+
+              )}
+
+
+              {/* DATE */}
+
+              <small className="news-date">
+
+                Published on:{" "}
+
+                {post.published_at
+                  ? new Date(
+                      post.published_at
+                    ).toLocaleDateString()
+                  : new Date(
+                      post.created_at
+                    ).toLocaleDateString()}
+
+              </small>
+
+            </div>
+
+          </article>
+
         ))}
+
       </div>
+
     </div>
   );
 }

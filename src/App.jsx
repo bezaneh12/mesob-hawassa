@@ -9,7 +9,8 @@ import AboutPage from "./AboutPage";
 import NewsPage from "./pages/NewsPage";
 import AnnouncementsPage from "./pages/AnnouncementsPage";
 import { ThemeProvider } from "./context/ThemeContext";
-
+import AdminLogin from "./admin/AdminLogin";
+import AdminDashboard from "./admin/AdminDashboard";
 function App() {
   const [lang, setLang] = useState("both");
 
@@ -41,6 +42,10 @@ function App() {
           {/* News and announcements */}
           <Route path="/news" element={<NewsPage />} />
           <Route path="/announcements" element={<AnnouncementsPage />} />
+
+          {/* Admin routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
         <Footer />
       </Router>

@@ -1,22 +1,17 @@
 import { supabase } from "../supabase";
 
 export async function getInstitutions() {
-  if (!supabase?.from) {
-    return [];
+  const { data, error } = await supabase
+    .from("institutions")
+    .select("id, name, name_am, logo_url")
+    .order("name");
+
+  if (error) {
+    console.error("Error fetching institutions:", error);
+    throw error;
   }
 
-  try {
-    const { data, error } = await supabase
-      .from("institutions")
-      .select("*")
-     
-    if (error) {
-      throw error;
-    }
+  console.log("Institutions loaded from Supabase:", data);
 
-    return data ?? [];
-  } catch (error) {
-    console.error("Error loading institutions:", error);
-    return [];
-  }
+  return data || [];
 }
