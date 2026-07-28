@@ -26,6 +26,7 @@ function App() {
               <>
                 <Hero />
                 <Institutions />
+                <NewsPage limit={6} preview />
               </>
             }
           />
