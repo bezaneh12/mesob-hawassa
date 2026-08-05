@@ -13,6 +13,7 @@ function ManageServices() {
   const [form, setForm] = useState({
     name: "",
     name_am: "",
+    booking_link: "",
   });
 
   const [editingId, setEditingId] = useState(null);
@@ -71,7 +72,7 @@ function ManageServices() {
 
     const { data, error } = await supabase
       .from("services")
-      .select("id, institution_id, name, name_am, created_at, updated_at")
+      .select("id, institution_id, name, name_am, booking_link, created_at, updated_at")
       .eq("institution_id", institutionId)
       .order("name");
 
@@ -157,6 +158,7 @@ function ManageServices() {
     setForm({
       name: "",
       name_am: "",
+      booking_link: "",
     });
 
     setEditingId(null);
@@ -193,6 +195,7 @@ function ManageServices() {
         institution_id: selectedInstitutionId,
         name: form.name.trim(),
         name_am: form.name_am.trim() || null,
+        booking_link: form.booking_link.trim() || null,
         updated_at: new Date().toISOString(),
       };
 
@@ -201,13 +204,18 @@ function ManageServices() {
       // ========================================
 
       if (editingId) {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from("services")
           .update(serviceData)
-          .eq("id", editingId);
+          .eq("id", editingId)
+          .select();
 
         if (error) {
           throw error;
+        }
+
+        if (data && data.length === 0) {
+          throw new Error("Update failed! Zero rows were affected. Your Supabase RLS (Row Level Security) is blocking UPDATE actions on the services table.");
         }
       }
 
@@ -255,6 +263,7 @@ function ManageServices() {
     setForm({
       name: service.name || "",
       name_am: service.name_am || "",
+      booking_link: service.booking_link || "",
     });
 
     window.scrollTo({
@@ -480,6 +489,25 @@ function ManageServices() {
                 value={form.name_am}
                 onChange={handleChange}
                 placeholder="የአገልግሎቱን ስም በአማርኛ ያስገቡ"
+              />
+
+            </div>
+
+            {/* BOOKING LINK */}
+
+            <div className="admin-form-group">
+
+              <label htmlFor="booking_link">
+                Booking Link (Optional)
+              </label>
+
+              <input
+                id="booking_link"
+                name="booking_link"
+                type="text"
+                value={form.booking_link}
+                onChange={handleChange}
+                placeholder="https://example.com/book"
               />
 
             </div>

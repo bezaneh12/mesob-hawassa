@@ -157,17 +157,45 @@ function Services() {
                   <h3>Requirements</h3>
 
                   {selectedService ? (
-                    requirements.length > 0 ? (
-                      <ul className="requirements-list">
-                        {requirements.map((req) => (
-                          <li key={req.id}>{req.requirement}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="no-requirements">
-                        No requirements found.
-                      </p>
-                    )
+                    <div className="service-details-container" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                      {requirements.length > 0 ? (
+                        <ul className="requirements-list" style={{ flexGrow: 1 }}>
+                          {requirements.map((req) => (
+                            <li key={req.id}>{req.requirement}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="no-requirements" style={{ flexGrow: 1 }}>
+                          No requirements found.
+                        </p>
+                      )}
+
+                      {selectedService.booking_link && (
+                        <a
+                          href={selectedService.booking_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="book-now-button"
+                          style={{
+                            marginTop: "1.5rem",
+                            display: "inline-block",
+                            backgroundColor: "var(--primary-color, #2563eb)",
+                            color: "white",
+                            padding: "0.75rem 1.5rem",
+                            borderRadius: "6px",
+                            textDecoration: "none",
+                            fontWeight: "600",
+                            textAlign: "center",
+                            alignSelf: "flex-start",
+                            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+                          }}
+                          onMouseOver={(e) => e.target.style.opacity = "0.9"}
+                          onMouseOut={(e) => e.target.style.opacity = "1"}
+                        >
+                          Book Now
+                        </a>
+                      )}
+                    </div>
                   ) : (
                     <p className="no-requirements">
                       Select a service on the left to see its requirements.

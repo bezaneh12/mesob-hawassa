@@ -14,7 +14,7 @@ export async function getServiceInstitutions() {
 export async function getServicesByInstitution(institutionId) {
   const { data, error } = await supabase
     .from("services")
-    .select("*")
+    .select("id, institution_id, name, name_am, booking_link, created_at, updated_at")
     .eq("institution_id", institutionId)
     .order("name");
 
