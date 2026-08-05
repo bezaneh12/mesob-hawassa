@@ -7,22 +7,54 @@
 
 /* ===== Theme Variables ===== */
 :root {
+  /* Brand colors (Government Logo) */
+  --brand-navy: #1e3c8f;
+  --brand-navy-deep: #0a1628;
+  --brand-gold: #c2931d;
+  --brand-gold-bright: #d4a017;
+  --brand-cream: #fbf7ef;
+
+  /* Backgrounds */
   --bg-primary: #ffffff;
   --bg-secondary: #f3f4f6;
+  --bg-tertiary: #eff6ff;
+  --bg-card: rgba(255, 255, 255, 0.95);
+
+  /* Typography */
   --text-primary: #111827;
   --text-secondary: #374151;
+  --text-muted: #6b7280;
+  
+  /* Semantic Text */
+  --text-heading: var(--brand-navy);
+  --text-accent: var(--brand-gold);
+  
+  /* UI Elements */
   --border-color: #e5e7eb;
   --navbar-bg: linear-gradient(90deg, #1e3c8f, #2948a8, #b88a1f);
+  --page-gradient: linear-gradient(135deg, #eff6ff 0%, #ffffff 45%, #fffaf0 100%);
 }
 
 html.dark-mode {
+  /* Backgrounds */
   --bg-primary: #111827;
   --bg-secondary: #1f2937;
+  --bg-tertiary: rgba(30, 60, 143, 0.2);
+  --bg-card: rgba(31, 41, 55, 0.95);
+
+  /* Typography */
   --text-primary: #eff6ff;
   --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  
+  /* Semantic Text */
+  --text-heading: #93c5fd; /* Soft blue for dark mode headings */
+  --text-accent: #facc15; /* Bright gold for contrast */
+
+  /* UI Elements */
   --border-color: #374151;
-  /* Navbar stays the original gradient in dark mode too */
   --navbar-bg: linear-gradient(90deg, #1e3c8f, #2948a8, #b88a1f);
+  --page-gradient: linear-gradient(135deg, #0f172a, #1a1f2e);
 }
 
 /* ===== Smooth theme transitions ===== */
@@ -332,15 +364,12 @@ html.dark-mode .dropdown-menu {
 .page-shell {
   min-height: 100vh;
   padding: 32px 20px 60px;
-  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 45%, #fffaf0 100%);
-  color: #111827;
+  background: var(--page-gradient);
+  color: var(--text-primary);
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-html.dark-mode .page-shell {
-  background: linear-gradient(135deg, #0f172a, #1a1f2e);
-  color: #eff6ff;
-}
+
 
 .news-page-shell,
 .announcements-page-shell {
@@ -450,23 +479,19 @@ html.dark-mode .page-shell {
 
 .page-header h1 {
   font-size: 2rem;
-  color: #1e3c8f;
+  color: var(--text-heading);
   margin-bottom: 8px;
 }
 
 .page-header p {
-  color: #374151;
+  color: var(--text-secondary);
   line-height: 1.6;
   max-width: 800px;
 }
 
-html.dark-mode .page-header h1 {
-  color: #93c5fd;
-}
 
-html.dark-mode .page-header p {
-  color: #d1d5db;
-}
+
+
 
 .page-grid {
   max-width: 1100px;
@@ -476,7 +501,7 @@ html.dark-mode .page-header p {
 }
 
 .page-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-card);
   border: 1px solid #e5e7eb;
   border-radius: 16px;
   padding: 18px;
@@ -484,30 +509,21 @@ html.dark-mode .page-header p {
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-html.dark-mode .page-card {
-  background: rgba(31, 41, 55, 0.95);
-  border: 1px solid #374151;
-}
 
-html.dark-mode .page-card h2,
-html.dark-mode .page-card h3 {
-  color: #93c5fd;
-}
+
+
 
 .page-card h2,
 .page-card h3 {
-  color: #1e3c8f;
+  color: var(--text-heading);
   margin-bottom: 8px;
 }
 
-html.dark-mode .page-card p,
-html.dark-mode .page-card li {
-  color: #d1d5db;
-}
+
 
 .page-card p,
 .page-card li {
-  color: #374151;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -554,7 +570,7 @@ html.dark-mode .announcement-card {
   display: grid;
   gap: 6px;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-primary);
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -620,18 +636,14 @@ html.dark-mode .vacancy-card strong {
 }
 
 .note-box {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 10px 12px;
-  color: #1e3c8f;
+  color: var(--text-heading);
 }
 
-html.dark-mode .note-box {
-  background: rgba(30, 60, 143, 0.2);
-  border-color: #3b82f6;
-  color: #93c5fd;
-}
+
 
 .hero {
   height: 85vh;
@@ -687,26 +699,23 @@ html.dark-mode .hero-btn:hover {
 
 .institutions {
   padding: 60px 40px;
-  background: linear-gradient(135deg, #f4f7ff 0%, #ffffff 45%, #fffaf1 100%);
+  background: var(--page-gradient);
   text-align: center;
   color: var(--text-primary);
 }
 
-html.dark-mode .institutions {
-  background: linear-gradient(135deg, #0f172a, #1a1f2e);
-  color: var(--text-primary);
-}
+
 
 .institutions h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #1e3c8f;
+  color: var(--text-heading);
 }
 
 .institutions p {
   font-size: 1.2rem;
   margin-bottom: 40px;
-  color: #4b5563;
+  color: var(--text-secondary);
 }
 
 .institution-list {
@@ -771,12 +780,10 @@ html.dark-mode .institution-icon {
 
 .institution-card h3 {
   margin-bottom: 10px;
-  color: #1e3c8f
+  color: var(--text-heading);
 }
 
-html.dark-mode .institution-card h3 {
-  color: #f7f5ef;
-}
+
 
 .institution-card p {
   font-size: 0.95rem;
