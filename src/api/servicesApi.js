@@ -3,7 +3,7 @@ import { supabase } from "../supabase";
 export async function getServiceInstitutions() {
   const { data, error } = await supabase
     .from("institutions")
-    .select("id, name, logo_url")
+    .select("id, name, name_am, logo_url")
     .order("name");
 
   if (error) throw error;
