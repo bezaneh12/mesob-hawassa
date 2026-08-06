@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabase";
+import { useTranslation } from "../context/TranslationContext";
 import "./news.css";
 
 function NewsPage({ limit, preview }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     async function loadNews() {
@@ -70,7 +72,7 @@ function NewsPage({ limit, preview }) {
     return (
       <div className="news-page">
         <div className="news-status">
-          <p>Loading news...</p>
+          <p>{lang === 'am' ? 'ዜና በመጫን ላይ...' : 'Loading news...'}</p>
         </div>
       </div>
     );
@@ -105,12 +107,12 @@ function NewsPage({ limit, preview }) {
       <div className={isPreview ? "news-page news-preview" : "news-page"}>
 
         <h2>
-          Latest News
+          {lang === 'am' ? 'አዳዲስ ዜናዎች' : 'Latest News'}
         </h2>
 
         <div className="news-status">
           <p>
-            No news available at this time.
+            {lang === 'am' ? 'በአሁኑ ጊዜ ምንም ዜና የለም።' : 'No news available at this time.'}
           </p>
         </div>
 
@@ -126,9 +128,9 @@ function NewsPage({ limit, preview }) {
     return (
       <div className="news-page news-preview">
         <div className="news-page-header">
-          <h2>Latest News</h2>
+          <h2>{lang === 'am' ? 'አዳዲስ ዜናዎች' : 'Latest News'}</h2>
           <Link to="/news" className="news-view-all">
-            See all news
+            {lang === 'am' ? 'ሁሉንም ዜናዎች ይመልከቱ' : 'See all news'}
           </Link>
         </div>
 
@@ -145,9 +147,11 @@ function NewsPage({ limit, preview }) {
                 )}
 
                 <div className="news-card-content">
-                  <h3>{post.title}</h3>
+                  <h3>{lang === 'am' ? post.title_am || post.title : post.title}</h3>
                   <div className="news-content">
-                    {post.content ? post.content : "No content available."}
+                    {lang === 'am' 
+                      ? (post.content_am || post.content || 'ምንም ይዘት የለም።') 
+                      : (post.content || 'No content available.')}
                   </div>
                   {post.video_url && (
                     <video controls className="news-video">
@@ -156,7 +160,8 @@ function NewsPage({ limit, preview }) {
                     </video>
                   )}
                   <small className="news-date">
-                    Published on: {post.published_at
+                    {lang === 'am' ? 'የታተመበት ቀን: ' : 'Published on: '}
+                    {post.published_at
                       ? new Date(post.published_at).toLocaleDateString()
                       : new Date(post.created_at).toLocaleDateString()}
                   </small>
@@ -173,7 +178,7 @@ function NewsPage({ limit, preview }) {
     <div className="news-page">
 
       <h2>
-        Latest News
+        {lang === 'am' ? 'አዳዲስ ዜናዎች' : 'Latest News'}
       </h2>
 
       <div className="news-grid">
@@ -209,14 +214,16 @@ function NewsPage({ limit, preview }) {
               {/* TITLE */}
 
               <h3>
-                {post.title}
+                {lang === 'am' ? post.title_am || post.title : post.title}
               </h3>
 
 
               {/* NEWS CONTENT */}
 
               <div className="news-content">
-                {post.content ? post.content : "No content available."}
+                {lang === 'am' 
+                  ? (post.content_am || post.content || 'ምንም ይዘት የለም።') 
+                  : (post.content || 'No content available.')}
               </div>
 
 
@@ -246,7 +253,7 @@ function NewsPage({ limit, preview }) {
 
               <small className="news-date">
 
-                Published on:{" "}
+                {lang === 'am' ? 'የታተመበት ቀን: ' : 'Published on: '}{" "}
 
                 {post.published_at
                   ? new Date(

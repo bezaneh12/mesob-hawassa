@@ -1,31 +1,33 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "../context/TranslationContext";
 
 const HERO_SLIDES = [
   {
     image: "/building.jpg",
-    title: "Hawassa MESOB",
-    subtitle: "Welcome to the One Center Digital Government Service Portal",
+    titleKey: "Hawassa MESOB",
+    subtitleKey: "welcome",
   },
   {
     image: "/building2.jpg",
-    title: "Centralized Public Services",
-    subtitle: "Access multiple government and partner institutions from a single, unified platform",
+    titleKey: "Centralized Public Services",
+    subtitleKey: "Access multiple government and partner institutions from a single, unified platform",
   },
   {
     image: "/office1.jpg",
-    title: "Digital First Governance",
-    subtitle: "Streamlining your administrative processes with modern, fast, and transparent services",
+    titleKey: "Digital First Governance",
+    subtitleKey: "Streamlining your administrative processes with modern, fast, and transparent services",
   },
   {
     image: "/office2.png",
-    title: "Empowering Citizens",
-    subtitle: "Stay updated with the latest news, announcements, and seamless appointment bookings",
+    titleKey: "Empowering Citizens",
+    subtitleKey: "Stay updated with the latest news, announcements, and seamless appointment bookings",
   }
 ];
 
 function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,8 +66,8 @@ function Hero() {
             alignItems: "center"
           }}
         >
-          <h1>{currentSlide.title}</h1>
-          <p>{currentSlide.subtitle}</p>
+          <h1>{t(currentSlide.titleKey)}</h1>
+          <p>{t(currentSlide.subtitleKey)}</p>
         </div>
       </div>
     </section>

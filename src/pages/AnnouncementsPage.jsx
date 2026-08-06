@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAnnouncements } from "../api/announcementApi";
+import { useTranslation } from "../context/TranslationContext";
 
 function AnnouncementsPage() {
+  const { t, lang } = useTranslation();
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,26 +22,26 @@ function AnnouncementsPage() {
     loadAnnouncements();
   }, []);
 
-  if (loading) return <p>Loading announcements...</p>;
+  if (loading) return <p>{t("loadingAnnouncements")}</p>;
 
   return (
     <div className="announcements-page">
-      <h2>Announcements & Vacancies</h2>
+      <h2>{t("announcementsAndVacancies")}</h2>
 
       {announcements.length === 0 ? (
-        <p>No announcements available.</p>
+        <p>{t("noAnnouncements")}</p>
       ) : (
         announcements.map((item) => (
           <div key={item.id} className="vacancy-item">
-            <h3>{item.title}</h3>
+            <h3>{lang === 'am' ? item.title_am || item.title : item.title}</h3>
 
-            <p>{item.description}</p>
+            <p>{lang === 'am' ? item.description_am || item.description : item.description}</p>
 
             <small>
-              Deadline:{" "}
+              {t("deadline")}{" "}
               {item.deadline
                 ? new Date(item.deadline).toLocaleDateString()
-                : "N/A"}
+                : t("notAvailable")}
             </small>
 
             {item.application_link && (
@@ -49,7 +51,7 @@ function AnnouncementsPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button>Apply Now</button>
+                  <button>{t("applyNow")}</button>
                 </a>
               </div>
             )}

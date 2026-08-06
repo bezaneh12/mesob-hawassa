@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "./context/TranslationContext";
 import "./about.css";
 
 const VALUES = [
@@ -75,7 +76,8 @@ function SlideIn({ children, delay = 0 }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-export default function AboutPage({ lang }) {
+export default function AboutPage() {
+  const { lang } = useTranslation();
   const [openService, setOpenService] = useState(null);
   const [showTop, setShowTop]       = useState(false);
   const [scrollPct, setScrollPct]   = useState(0);

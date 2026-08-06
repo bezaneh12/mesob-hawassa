@@ -2,17 +2,19 @@ import React from "react";
 import { FaFacebook, FaLinkedin, FaTelegram } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import mesoblogo from "../assets/mesoblogo.jpg";
+import { useTranslation } from "../context/TranslationContext";
 import "./Footer.css";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="footer">
       <div className="footer-logo">
         <img src={mesoblogo} alt="MESOB Logo" />
       </div>
-      <h2>Hawassa MESOB - One Center Digital Government Service</h2>
+      <h2>{t("footerTitle")}</h2>
       <p className="subtitle">
-           THE NEW HORIZON OF SERVICES !
+           {t("footerSubtitle")}
       </p>
 
       <div className="social-icons">
@@ -28,7 +30,7 @@ const Footer = () => {
       </div>
 
       <p className="copyright">
-        © 2026 Hawassa-MESOB Center. All rights reserved.
+        {t("copyright")}
       </p>
     </footer>
   );
