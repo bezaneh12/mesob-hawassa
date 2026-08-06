@@ -5,6 +5,7 @@ import ManageInstitutions from "./ManageInstitutions";
 import ManageServices from "./ManageServices";
 import ManageRequirements from "./ManageRequirements";
 import ManageNews from "./ManageNews";
+import ManageAnnouncements from "./ManageAnnouncements";
 import "./Admin.css";
 
 function AdminDashboard() {
@@ -424,18 +425,7 @@ function AdminDashboard() {
 
           {activePage === "announcements" && (
 
-            <div>
-
-              <h2>
-                Manage Announcements
-              </h2>
-
-              <p>
-                Announcement management
-                will be added next.
-              </p>
-
-            </div>
+            <ManageAnnouncements />
 
           )}
 
