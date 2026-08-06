@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -9,47 +9,49 @@ import AboutPage from "./AboutPage";
 import NewsPage from "./pages/NewsPage";
 import AnnouncementsPage from "./pages/AnnouncementsPage";
 import { ThemeProvider } from "./context/ThemeContext";
+import { TranslationProvider } from "./context/TranslationContext";
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
-function App() {
-  const [lang, setLang] = useState("both");
 
+function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Navbar lang={lang} setLang={setLang} />
-        <Routes>
-          {/* Home page */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <Institutions />
-                <NewsPage limit={6} preview />
-              </>
-            }
-          />
+      <TranslationProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            {/* Home page */}
+            <Route
+              path="/"
+              element={
+                <>
+                  <Hero />
+                  <Institutions />
+                  <NewsPage limit={6} preview />
+                </>
+              }
+            />
 
-          {/* About Us page */}
-          <Route path="/about" element={<AboutPage lang={lang} />} />
+            {/* About Us page */}
+            <Route path="/about" element={<AboutPage />} />
 
-          {/* Services page */}
-          <Route path="/services" element={<Services />} />
+            {/* Services page */}
+            <Route path="/services" element={<Services />} />
 
-          {/* Institutions page */}
-          <Route path="/institutions" element={<Institutions />} />
+            {/* Institutions page */}
+            <Route path="/institutions" element={<Institutions />} />
 
-          {/* News and announcements */}
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/announcements" element={<AnnouncementsPage />} />
+            {/* News and announcements */}
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/announcements" element={<AnnouncementsPage />} />
 
-          {/* Admin routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        </Routes>
-        <Footer />
-      </Router>
+            {/* Admin routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </TranslationProvider>
     </ThemeProvider>
   );
 }

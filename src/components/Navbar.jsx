@@ -2,6 +2,7 @@ import { useState, useContext, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mesobLogo from "../assets/mesoblogo.jpg";
 import { ThemeContext } from "../context/ThemeContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function SunIcon() {
   return (
@@ -47,10 +48,11 @@ function MoonIcon() {
   );
 }
 
-function Navbar({ lang, setLang }) {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isDark, toggleTheme } = useContext(ThemeContext);
+  const { lang, setLang, t } = useTranslation();
 
 
   const dropdownRef = useRef(null);
@@ -86,10 +88,10 @@ function Navbar({ lang, setLang }) {
       {/* Nav links + utility controls */}
       <div className="navbar-right">
         <ul className={isOpen ? "nav-links open" : "nav-links"}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/institutions">Institutions</Link></li>
-          <li><Link to="/services">Services</Link></li>
-          <li><Link to="/appointment">Appointment</Link></li>
+          <li><Link to="/">{t("home")}</Link></li>
+          <li><Link to="/institutions">{t("institutions")}</Link></li>
+          <li><Link to="/services">{t("services")}</Link></li>
+          <li><Link to="/appointment">{lang === 'am' ? 'ቀጠሮ' : 'Appointment'}</Link></li>
 
           
           <li
@@ -105,7 +107,7 @@ function Navbar({ lang, setLang }) {
               }}
               aria-expanded={isDropdownOpen}
             >
-              What&apos;s New
+              {lang === 'am' ? 'ምን አዲስ ነገር አለ' : "What's New"}
             </button>
 
             <div className="dropdown-menu">
@@ -116,7 +118,7 @@ function Navbar({ lang, setLang }) {
                   setIsDropdownOpen(false);
                 }}
               >
-                News
+                {t("news")}
               </Link>
 
               <Link
@@ -126,12 +128,12 @@ function Navbar({ lang, setLang }) {
                   setIsDropdownOpen(false);
                 }}
               >
-                Announcements
+                {t("announcements")}
               </Link>
             </div>
           </li>
 
-          <li><Link to="/about">About Us</Link></li>
+          <li><Link to="/about">{t("about")}</Link></li>
         </ul>
 
         <div className="navbar-controls">

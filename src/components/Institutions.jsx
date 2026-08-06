@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getInstitutions } from "../api/institutionApi";
+import { useTranslation } from "../context/TranslationContext";
 
 function Institutions() {
   const [institutions, setInstitutions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     async function fetchInstitutions() {
@@ -25,7 +27,7 @@ function Institutions() {
   if (loading) {
     return (
       <section id="institutions" className="institutions">
-        <p>Loading institutions...</p>
+        <p>{t("loadingInstitutions")}</p>
       </section>
     );
   }
@@ -42,10 +44,10 @@ function Institutions() {
 
   return (
     <section id="institutions" className="institutions">
-      <h2>Institutions</h2>
+      <h2>{t("institutions")}</h2>
 
       <p>
-        Our partner institutions working with Hawassa MESOB.
+        {t("ourPartnerInstitutions")}
       </p>
 
       <div className="institution-list">
@@ -74,7 +76,7 @@ function Institutions() {
               )}
             </div>
 
-            <h3>{institution.name}</h3>
+            <h3>{lang === 'am' ? institution.name_am || institution.name : institution.name}</h3>
           </div>
         ))}
       </div>
