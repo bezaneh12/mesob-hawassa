@@ -42,6 +42,7 @@ function ManageInstitutions() {
     setLoading(false);
   }
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     if (!supabase) {
       setError("Supabase is not configured. Please add your environment variables.");

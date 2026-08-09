@@ -4,7 +4,7 @@ import { useTranslation } from "../context/TranslationContext";
 const HERO_SLIDES = [
   {
     image: "/building.jpg",
-    titleKey: "Hawassa MESOB",
+    titleKey: "heroTitleHawassaMesob",
     subtitleKey: "welcome",
   },
   {
@@ -14,8 +14,8 @@ const HERO_SLIDES = [
   },
   {
     image: "/office1.jpg",
-    titleKey: "Digital First Governance",
-    subtitleKey: "Streamlining your administrative processes with modern, fast, and transparent services",
+    titleKey: "heroTitleNewHorizon",
+    subtitleKey: "heroSubtitleNewHorizon",
   },
   {
     image: "/office2.png",

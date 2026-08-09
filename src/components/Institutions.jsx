@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getInstitutions } from "../api/institutionApi";
 import { useTranslation } from "../context/TranslationContext";
 

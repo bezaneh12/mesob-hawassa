@@ -27,14 +27,8 @@
 
 .news-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(320px, 1fr)
-    );
-
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 32px;
 }
 
 
@@ -44,22 +38,15 @@
 
 .news-card {
   background: #ffffff;
-
-  border-radius: 12px;
-
+  border-radius: 16px;
   overflow: hidden;
-
   display: flex;
   flex-direction: column;
-  height: 100%;
-
-  box-shadow:
-    0 5px 20px
-    rgba(0, 0, 0, 0.08);
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  width: 100%;
+  min-height: 580px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding-bottom: 4px;
 }
 
 .news-card:hover {
@@ -78,15 +65,12 @@
 
 .news-image {
   width: 100%;
-
-  height: 230px;
-
+  height: 320px;
   object-fit: contain;
   object-position: center;
-
   display: block;
   background: #f5f7fb;
-  padding: 8px;
+  padding: 14px;
   box-sizing: border-box;
 }
 
@@ -96,10 +80,11 @@
 ========================================== */
 
 .news-card-content {
-  padding: 22px;
+  padding: 30px 30px 26px;
   display: flex;
   flex-direction: column;
   flex: 1;
+  gap: 14px;
 }
 
 
@@ -147,9 +132,9 @@
 .news-video {
   width: 100%;
 
-  max-height: 300px;
+  max-height: 320px;
 
-  margin-top: 15px;
+  margin-top: 16px;
 
   border-radius: 8px;
 
@@ -227,8 +212,8 @@
 }
 
 .news-page.news-preview .news-card {
-  min-width: 320px;
-  max-width: 380px;
+  min-width: 380px;
+  max-width: 460px;
 }
 
 
@@ -288,4 +273,418 @@
     padding: 18px;
   }
 
+}
+  
+/* =========================================
+   REPLACE your previous "carousel + modal"
+   additions block with this one. It keeps
+   the carousel/gallery, drops the modal
+   (no longer used), and adds styles for the
+   hero post, inline read-more, video embeds,
+   and load-more pagination.
+   Paste this at the bottom of news.css.
+========================================= */
+
+/* --- General card tweaks --- */
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  /* If your site has a fixed/sticky navbar, raise this so the
+     auto-scroll doesn't tuck the card under it. e.g. 80px. */
+  scroll-margin-top: 20px;
+}
+
+.news-card .news-image {
+  width: 100%;
+  height: 260px;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  padding: 0; /* overrides the old img padding rule, which doesn't apply to a div wrapper */
+}
+
+.news-content-clamped {
+  display: box;
+  line-clamp: 3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.news-card-footer .news-date {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.news-readmore-btn {
+  background: none;
+  border: none;
+  color: #0b5ed7;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.news-readmore-btn:hover {
+  text-decoration: underline;
+}
+
+/* --- Smooth expand/collapse (grid-rows trick: animates height
+   without needing to measure pixels in JS) --- */
+
+.news-expand {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.news-expand.open {
+  grid-template-rows: 1fr;
+}
+
+.news-expand-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.news-expand.open .news-expand-inner {
+  padding-top: 4px;
+}
+
+/* --- Highlight ring so it's obvious the card just opened,
+   even before the auto-scroll finishes --- */
+
+.news-card.expanded {
+  box-shadow: 0 0 0 2px #0b5ed7, 0 10px 30px rgba(0, 0, 0, 0.14);
+}
+
+.news-card.just-opened {
+  animation: news-card-pulse 0.9s ease;
+}
+
+@keyframes news-card-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(11, 94, 215, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(11, 94, 215, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 2px #0b5ed7, 0 10px 30px rgba(0, 0, 0, 0.14);
+  }
+}
+
+/* --- Sticky close button pinned to the top of the expanded
+   content, so it's always reachable even mid-scroll through a
+   long post --- */
+
+.news-expand-close {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #0b5ed7;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.news-expand-close:hover {
+  background: #094bb0;
+}
+
+/* --- Hero (latest post), shown large at the top --- */
+
+.news-hero {
+  margin-bottom: 40px;
+}
+
+.news-hero .news-card {
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 380px;
+}
+
+.news-hero .news-image {
+  width: 45%;
+  height: auto;
+  border-radius: 12px 0 0 12px;
+  flex-shrink: 0;
+}
+
+.news-hero .news-card-content {
+  padding: 28px;
+  flex: 1;
+}
+
+.news-hero .news-card h3 {
+  font-size: 1.75rem;
+}
+
+.news-hero .news-content {
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .news-hero .news-card {
+    flex-direction: column;
+    min-height: unset;
+  }
+
+  .news-hero .news-image {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+/* --- Section heading between hero and grid --- */
+
+.news-section-heading {
+  color: #1f2937;
+  font-size: 1.3rem;
+  margin: 0 0 20px;
+}
+
+/* --- Compact cards used in the small preview slider --- */
+
+.news-slide .news-card-compact .news-image {
+  height: 175px;
+}
+
+.news-slide .news-card-compact h3 {
+  font-size: 1.1rem;
+}
+
+/* --- Load more / show fewer pagination --- */
+
+.news-pagination-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.news-loadmore-btn {
+  background: #0b5ed7;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.news-loadmore-btn:hover {
+  background: #094bb0;
+}
+
+.news-loadmore-btn-secondary {
+  background: transparent;
+  color: #0b5ed7;
+  border: 1px solid #0b5ed7;
+}
+
+.news-loadmore-btn-secondary:hover {
+  background: rgba(11, 94, 215, 0.08);
+}
+
+/* --- Video embed / thumbnail --- */
+
+.news-video-wrapper {
+  margin-bottom: 14px;
+  margin-top: 4px;
+}
+
+.news-video-thumb {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border: none;
+  border-radius: 8px;
+  background-color: #111;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.news-video-play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0b5ed7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 1;
+}
+
+.news-video-label {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
+.news-video-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.news-video-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.news-video-link {
+  display: inline-block;
+  color: #0b5ed7;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.news-video-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Image carousel (unchanged from before) --- */
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--bg-primary, #f5f7fb);
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.carousel-image {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  z-index: 2;
+}
+
+.carousel:hover .carousel-arrow {
+  opacity: 1;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.carousel-arrow-prev {
+  left: 8px;
+}
+
+.carousel-arrow-next {
+  right: 8px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-dot.active {
+  background: #fff;
+  transform: scale(1.25);
+}
+
+/* --- Explicit left-to-right, newest-first grid flow --- */
+
+.news-grid {
+  direction: ltr;
+  grid-auto-flow: row;
+}
+
+.news-slider-track {
+  direction: ltr;
 }

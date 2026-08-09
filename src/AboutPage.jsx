@@ -21,14 +21,14 @@ const HISTORY = [
   { year: "MAY 27, 2026",    en: "MESOB Hawassa Branch officially commenced service delivery to the residents of Hawassa City . The branch was established to provide integrated, efficient, and citizen-centered government services through a modern one-stop service center.", am: "ግንቦት 19 ቀን 2018 ዓ.ም. — የሀዋሳ መሶብ  ለሀዋሳ ከተማ ነዋሪዎች የተቀናጀ የመንግስት አገልግሎት በይፋ መስጠት ጀመረ። ቅርንጫፉ ዘመናዊ፣ ፈጣን፣ ግልጽ እና ተገልጋይ ተኮር አገልግሎት ለመስጠት ተቋቁሟል።" },
 ];
 
-const TEAM = [
+const _TEAM = [
   { initials: "AB", name: "Abebe Bekele",       role: "Branch Manager",       roleAm: "የቅርንጫፍ ሥራ አስኪያጅ" },
   { initials: "SM", name: "Selamawit Mekonnen", role: "Service Coordinator",   roleAm: "የአገልግሎት አስተባባሪ" },
   { initials: "TG", name: "Tadesse Girma",      role: "Digital Services Lead", roleAm: "የዲጂታል አገልግሎት ኃላፊ" },
   { initials: "HW", name: "Hiwot Wolde",        role: "Customer Experience",   roleAm: "የደንበኛ ተሞክሮ" },
 ];
 
-const SERVICES = [
+const _SERVICES = [
   { icon: "🪪", en: "National ID (Fayda)",          am: "ብሔራዊ መታወቂያ (ፋይዳ)",      desc: "Enroll or update your national Fayda ID. Bring original documents and a recent photo." },
   { icon: "✈️", en: "Immigration & Passport",        am: "ኢሚግሬሽንና ፓስፖርት",           desc: "Apply for or renew Ethiopian passports and immigration permits at the counter." },
   { icon: "📄", en: "Document Authentication",       am: "ሰነድ ማረጋገጫ",               desc: "Official notarisation and authentication of civil and legal documents." },
@@ -78,10 +78,9 @@ function SlideIn({ children, delay = 0 }) {
 // ══════════════════════════════════════════════════════════════════════════════
 export default function AboutPage() {
   const { lang } = useTranslation();
-  const [openService, setOpenService] = useState(null);
   const [showTop, setShowTop]       = useState(false);
   const [scrollPct, setScrollPct]   = useState(0);
-  const show = (w) => lang === "both" || lang === w;
+  const show = (w) => lang === "both" || lang === w; // eslint-disable-line no-unused-vars
 
   useEffect(() => {
     const onScroll = () => {
@@ -285,24 +284,6 @@ export default function AboutPage() {
             </FadeIn>
           </div>
         </div>
-      </section>
-    
-      {/* CTA */}
-      <section className="cta-section">
-        <div className="cta-content">
-          {show("en") && <h2 className="cta-title">Ready to access our services?</h2>}
-          {show("am") && <p className="cta-title-am">አገልግሎቶቻችንን ለማግኘት ዝግጁ ነዎት?</p>}
-          <p className="cta-subtitle">Visit the Hawassa MESOB or start online — your time matters.</p>
-          <div className="cta-buttons">
-            <button className="cta-btn-primary">
-              {show("en") && "Visit Us"}{lang === "both" && " · "}{show("am") && "ጎብኙን"}
-            </button>
-            <button className="cta-btn-secondary">
-              {show("en") && "Contact Us"}{lang === "both" && " · "}{show("am") && "ያግኙን"}
-            </button>
-          </div>
-        </div>
-        <div className="cta-bottom-bar" />
       </section>
 
       {/* Back-to-top button */}

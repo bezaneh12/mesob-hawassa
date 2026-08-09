@@ -22,11 +22,12 @@ export const dictionary = {
     
     // Hero
     welcome: "Welcome to the One Center Digital Government Service Portal",
-    "Hawassa MESOB": "Hawassa MESOB",
+    heroTitleHawassaMesob: "HAWASSA MESOB",
+    "HAWASSA MESOB": "HAWASSA MESOB",
     "Centralized Public Services": "Centralized Public Services",
     "Access multiple government and partner institutions from a single, unified platform": "Access multiple government and partner institutions from a single, unified platform",
-    "Digital First Governance": "Digital First Governance",
-    "Streamlining your administrative processes with modern, fast, and transparent services": "Streamlining your administrative processes with modern, fast, and transparent services",
+    "heroTitleNewHorizon": "THE NEW HORIZON OF SERVICE !",
+    "heroSubtitleNewHorizon": "Streamlining your administrative processes with modern, fast, and transparent services",
     "Empowering Citizens": "Empowering Citizens",
     "Stay updated with the latest news, announcements, and seamless appointment bookings": "Stay updated with the latest news, announcements, and seamless appointment bookings",
     
@@ -77,11 +78,12 @@ export const dictionary = {
     
     // Hero
     welcome: "እንኳን ወደ አንድ ማዕከል ዲጂታል የመንግስት አገልግሎት ፖርታል በደህና መጡ",
+    heroTitleHawassaMesob: "ሀዋሳ መሶብ",
     "Hawassa MESOB": "ሀዋሳ መሶብ",
     "Centralized Public Services": "የተማከለ የህዝብ አገልግሎት",
     "Access multiple government and partner institutions from a single, unified platform": "የተለያዩ የመንግስት እና የአጋር ተቋማትን አገልግሎቶች ከአንድ ማዕከል ያግኙ",
-    "Digital First Governance": "ዲጂታል የመንግስት አሰራር",
-    "Streamlining your administrative processes with modern, fast, and transparent services": "አስተዳደራዊ ሂደቶችዎን በዘመናዊ፣ ፈጣን እና ግልጽ አገልግሎቶች ማቀላጠፍ",
+    "heroTitleNewHorizon": "አዲስ የአገልግሎት አድማስ !",
+    "heroSubtitleNewHorizon": "አስተዳደራዊ ሂደቶችዎን በዘመናዊ፣ ፈጣን እና ግልጽ አገልግሎቶች ማቀላጠፍ",
     "Empowering Citizens": "ዜጎችን ማብቃት",
     "Stay updated with the latest news, announcements, and seamless appointment bookings": "አዳዲስ ዜናዎችን፣ ማስታወቂያዎችን እና የቀጠሮ ምዝገባዎችን በቀላሉ ያግኙ",
     

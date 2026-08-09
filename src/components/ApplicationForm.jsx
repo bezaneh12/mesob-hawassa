@@ -39,7 +39,7 @@ function ApplicationForm({ vacancyId }) {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         return res.json();
       })
-      .then(result => {
+      .then(() => {
         setMessage({ type: "success", text: "Application submitted successfully!" });
         setFormData({ name: "", email: "", phone: "", cv: null });
       })

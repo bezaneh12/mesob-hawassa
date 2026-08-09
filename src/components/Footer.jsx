@@ -1,4 +1,4 @@
-import React from "react";
+
 import { FaFacebook, FaLinkedin, FaTelegram } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import mesoblogo from "../assets/mesoblogo.jpg";

@@ -91,6 +91,7 @@ function ManageServices() {
   // INITIAL LOAD
   // ============================================
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     if (!supabase) {
       setError("Supabase is not configured. Please add your environment variables.");
@@ -122,6 +123,7 @@ function ManageServices() {
   // WHEN INSTITUTION CHANGES
   // ============================================
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     if (selectedInstitutionId) {
       loadServices(selectedInstitutionId);

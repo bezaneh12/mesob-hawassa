@@ -1,5 +1,5 @@
 // src/components/Modal.jsx
-import React from "react";
+
 
 function Modal({ show, onClose, institution }) {
   if (!show) return null;

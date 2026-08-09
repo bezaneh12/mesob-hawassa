@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -6,7 +5,7 @@ import Institutions from "./components/Institutions";
 import Services from "./components/Services";
 import Footer from "./components/Footer";
 import AboutPage from "./AboutPage";
-import NewsPage from "./pages/NewsPage";
+import NewsPage from "./pages/NewsPage.jsx";
 import AnnouncementsPage from "./pages/AnnouncementsPage";
 import { ThemeProvider } from "./context/ThemeContext";
 import { TranslationProvider } from "./context/TranslationContext";

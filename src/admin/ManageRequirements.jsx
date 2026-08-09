@@ -151,6 +151,7 @@ function ManageRequirements() {
   // INITIAL LOAD
   // ==========================================
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     loadInstitutions();
   }, []);
@@ -159,6 +160,7 @@ function ManageRequirements() {
   // WHEN INSTITUTION CHANGES
   // ==========================================
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     setSelectedServiceId("");
     setServices([]);
@@ -176,6 +178,7 @@ function ManageRequirements() {
   // WHEN SERVICE CHANGES
   // ==========================================
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     resetForm();
 
@@ -248,16 +251,32 @@ function ManageRequirements() {
     }
 
     setSaving(true);
+        console.log("Form data:", form);
 
+const requirementData = {
+  service_id: selectedServiceId,
+  requirement: form.requirement.trim(),
+  requirement_am: form.requirement_am,
+};
+
+console.log("Requirement data being sent:", requirementData);
     try {
       const requirementData = {
-        service_id: selectedServiceId,
-        requirement:
-          form.requirement.trim(),
-        requirement_am:
-          form.requirement_am.trim() ||
-          null,
-      };
+  requirement: form.requirement,
+  requirement_am: form.requirement_am,
+};
+
+console.log("Updating:", requirementData);
+
+const { data, error } = await supabase
+  .from("service_requirements")
+  .update(requirementData)
+  .eq("id", editingId)
+  .select();
+
+console.log("Returned row:", data);
+
+if (error) throw error;
 
       // ========================================
       // UPDATE EXISTING REQUIREMENT
