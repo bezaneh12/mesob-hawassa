@@ -4,6 +4,7 @@ import {
   getServicesByInstitution,
   getRequirements,
 } from "../api/servicesApi";
+import { useTranslation } from "../context/translation-context";
 
 function Services() {
   const [institutions, setInstitutions] = useState([]);
@@ -11,6 +12,7 @@ function Services() {
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [requirements, setRequirements] = useState([]);
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     async function loadInstitutions() {
@@ -62,8 +64,8 @@ function Services() {
   return (
     <section className="services-page">
       <header className="services-hero">
-        <h1>Our Services</h1>
-        <p>Explore the digital services available through Hawassa MESOB.</p>
+        <h1>{t("ourServices")}</h1>
+        <p>{t("exploreServices")}</p>
       </header>
 
       <div className="services-grid">
@@ -90,7 +92,7 @@ function Services() {
               }}
             />
 
-            <h3>{institution.name}</h3>
+            <h3>{lang === 'am' ? institution.name_am || institution.name : institution.name}</h3>
           </article>
         ))}
       </div>
@@ -102,7 +104,7 @@ function Services() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{selectedInstitution.name}</h2>
+              <h2>{lang === 'am' ? selectedInstitution.name_am || selectedInstitution.name : selectedInstitution.name}</h2>
 
               <button
                 className="modal-close"
@@ -116,10 +118,10 @@ function Services() {
             <div className="modal-content">
               <div className="service-detail-card">
                 <div className="detail-section services-offered-panel">
-                  <h3>Services Offered</h3>
+                  <h3>{t("servicesOffered")}</h3>
 
                   <p className="services-hint">
-                    Tap a service to see what you need to bring.
+                    {t("tapService")}
                   </p>
 
                   <ul className="services-offered-grid">
@@ -139,7 +141,7 @@ function Services() {
                             {index + 1}
                           </span>
 
-                          <p>{service.name}</p>
+                          <p>{lang === 'am' ? service.name_am || service.name : service.name}</p>
 
                           <span
                             className="service-offered-chevron"
@@ -154,23 +156,51 @@ function Services() {
                 </div>
 
                 <div className="detail-section requirements-panel">
-                  <h3>Requirements</h3>
+                  <h3>{t("requirements")}</h3>
 
                   {selectedService ? (
-                    requirements.length > 0 ? (
-                      <ul className="requirements-list">
-                        {requirements.map((req) => (
-                          <li key={req.id}>{req.requirement}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="no-requirements">
-                        No requirements found.
-                      </p>
-                    )
+                    <div className="service-details-container" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                      {requirements.length > 0 ? (
+                        <ul className="requirements-list" style={{ flexGrow: 1 }}>
+                          {requirements.map((req) => (
+                            <li key={req.id}>{lang === 'am' ? req.requirement_am || req.requirement : req.requirement}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="no-requirements" style={{ flexGrow: 1 }}>
+                          {t("noRequirements")}
+                        </p>
+                      )}
+
+                      {selectedService.booking_link && (
+                        <a
+                          href={selectedService.booking_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="book-now-button"
+                          style={{
+                            marginTop: "1.5rem",
+                            display: "inline-block",
+                            backgroundColor: "var(--primary-color, #2563eb)",
+                            color: "white",
+                            padding: "0.75rem 1.5rem",
+                            borderRadius: "6px",
+                            textDecoration: "none",
+                            fontWeight: "600",
+                            textAlign: "center",
+                            alignSelf: "flex-start",
+                            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+                          }}
+                          onMouseOver={(e) => e.target.style.opacity = "0.9"}
+                          onMouseOut={(e) => e.target.style.opacity = "1"}
+                        >
+                          {t("bookNow")}
+                        </a>
+                      )}
+                    </div>
                   ) : (
                     <p className="no-requirements">
-                      Select a service on the left to see its requirements.
+                      {t("selectServiceLeft")}
                     </p>
                   )}
                 </div>

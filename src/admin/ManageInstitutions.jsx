@@ -43,6 +43,9 @@ function ManageInstitutions() {
   }
 
   useEffect(() => {
+    // Initial data load on mount; also handles the "Supabase not configured"
+    // guard shown before any environment variables are set.
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (!supabase) {
       setError("Supabase is not configured. Please add your environment variables.");
       setLoading(false);
@@ -50,6 +53,7 @@ function ManageInstitutions() {
     }
 
     loadInstitutions();
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   function handleChange(event) {
@@ -239,10 +243,6 @@ function ManageInstitutions() {
 
     setError("");
 
-    const institution = institutions.find(
-      (item) => item.id === id
-    );
-
     const { error } = await supabase
       .from("institutions")
       .delete()
@@ -256,8 +256,6 @@ function ManageInstitutions() {
 
     // We don't delete the storage image here yet.
     // The database record is deleted successfully.
-    console.log("Deleted institution:", institution?.name);
-
     await loadInstitutions();
   }
 

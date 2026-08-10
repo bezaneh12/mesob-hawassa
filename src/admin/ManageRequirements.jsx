@@ -152,41 +152,40 @@ function ManageRequirements() {
   // ==========================================
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadInstitutions();
   }, []);
 
   // ==========================================
-  // WHEN INSTITUTION CHANGES
+  // WHEN INSTITUTION CHANGES (user selection, not an effect)
   // ==========================================
 
-  useEffect(() => {
+  function handleInstitutionSelect(institutionId) {
+    setSelectedInstitutionId(institutionId);
     setSelectedServiceId("");
     setServices([]);
     setRequirements([]);
     resetForm();
 
-    if (selectedInstitutionId) {
-      loadServices(
-        selectedInstitutionId
-      );
+    if (institutionId) {
+      loadServices(institutionId);
     }
-  }, [selectedInstitutionId]);
+  }
 
   // ==========================================
-  // WHEN SERVICE CHANGES
+  // WHEN SERVICE CHANGES (user selection, not an effect)
   // ==========================================
 
-  useEffect(() => {
+  function handleServiceSelect(serviceId) {
+    setSelectedServiceId(serviceId);
     resetForm();
 
-    if (selectedServiceId) {
-      loadRequirements(
-        selectedServiceId
-      );
+    if (serviceId) {
+      loadRequirements(serviceId);
     } else {
       setRequirements([]);
     }
-  }, [selectedServiceId]);
+  }
 
   // ==========================================
   // HANDLE FORM INPUT
@@ -249,16 +248,13 @@ function ManageRequirements() {
 
     setSaving(true);
 
-    try {
-      const requirementData = {
-        service_id: selectedServiceId,
-        requirement:
-          form.requirement.trim(),
-        requirement_am:
-          form.requirement_am.trim() ||
-          null,
-      };
+    const requirementData = {
+      service_id: selectedServiceId,
+      requirement: form.requirement.trim(),
+      requirement_am: form.requirement_am,
+    };
 
+    try {
       // ========================================
       // UPDATE EXISTING REQUIREMENT
       // ========================================
@@ -489,7 +485,7 @@ function ManageRequirements() {
                 selectedInstitutionId
               }
               onChange={(event) =>
-                setSelectedInstitutionId(
+                handleInstitutionSelect(
                   event.target.value
                 )
               }
@@ -567,7 +563,7 @@ function ManageRequirements() {
                   selectedServiceId
                 }
                 onChange={(event) =>
-                  setSelectedServiceId(
+                  handleServiceSelect(
                     event.target.value
                   )
                 }

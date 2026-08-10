@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "./context/translation-context";
 import "./about.css";
 
 const VALUES = [
@@ -18,24 +19,6 @@ const HISTORY = [
   { year: "APRIL 26, 2025",  en: "Prime Minister Abiy Ahmed inaugurates the first MESOB One-Stop Service Center in Addis Ababa, integrating 12 government ministries and 41 services.", am: "መሶብ በኢትዮጵያ በይፋ የተጀመረው ሚያዝያ 18 ቀን 2017 ዓ.ም ሲሆን፣ ጠቅላይ ሚኒስትር ዶክተር ዐቢይ አህመድ በአዲስ አበባ የመጀመሪያውን የመሶብ የአንድ ማዕከል አገልግሎት በይፋ አስመርቀዋል።" },
   { year: "LATE 2025–2026",  en: "The MESOB model expanded to additional locations and regions, improving citizen access to government services.",                                         am: "የመሶብ አገልግሎት በሀገር አቀፍ ደረጃ ወደ ክልሎች ተስፋፋ፣ ሲዳማ ክልልንም አካተተ።" },
   { year: "MAY 27, 2026",    en: "MESOB Hawassa Branch officially commenced service delivery to the residents of Hawassa City . The branch was established to provide integrated, efficient, and citizen-centered government services through a modern one-stop service center.", am: "ግንቦት 19 ቀን 2018 ዓ.ም. — የሀዋሳ መሶብ  ለሀዋሳ ከተማ ነዋሪዎች የተቀናጀ የመንግስት አገልግሎት በይፋ መስጠት ጀመረ። ቅርንጫፉ ዘመናዊ፣ ፈጣን፣ ግልጽ እና ተገልጋይ ተኮር አገልግሎት ለመስጠት ተቋቁሟል።" },
-];
-
-const TEAM = [
-  { initials: "AB", name: "Abebe Bekele",       role: "Branch Manager",       roleAm: "የቅርንጫፍ ሥራ አስኪያጅ" },
-  { initials: "SM", name: "Selamawit Mekonnen", role: "Service Coordinator",   roleAm: "የአገልግሎት አስተባባሪ" },
-  { initials: "TG", name: "Tadesse Girma",      role: "Digital Services Lead", roleAm: "የዲጂታል አገልግሎት ኃላፊ" },
-  { initials: "HW", name: "Hiwot Wolde",        role: "Customer Experience",   roleAm: "የደንበኛ ተሞክሮ" },
-];
-
-const SERVICES = [
-  { icon: "🪪", en: "National ID (Fayda)",          am: "ብሔራዊ መታወቂያ (ፋይዳ)",      desc: "Enroll or update your national Fayda ID. Bring original documents and a recent photo." },
-  { icon: "✈️", en: "Immigration & Passport",        am: "ኢሚግሬሽንና ፓስፖርት",           desc: "Apply for or renew Ethiopian passports and immigration permits at the counter." },
-  { icon: "📄", en: "Document Authentication",       am: "ሰነድ ማረጋገጫ",               desc: "Official notarisation and authentication of civil and legal documents." },
-  { icon: "💰", en: "Ministry of Revenue",           am: "የገቢዎች ሚኒስቴር",             desc: "Tax registration, TIN issuance, and revenue-related transactions." },
-  { icon: "🏦", en: "Commercial Bank of Ethiopia",   am: "የኢትዮጵያ ንግድ ባንክ",          desc: "Open accounts, transfer funds, and access CBE banking services on-site." },
-  { icon: "📡", en: "Ethio Telecom Services",        am: "የኢትዮ ቴሌኮም አገልግሎቶች",       desc: "SIM registration, plan upgrades, and telecom support in one visit." },
-  { icon: "🏢", en: "Trade & Registration",          am: "ንግድና ምዝገባ",               desc: "Business registration, licensing, and trade-permit renewals." },
-  { icon: "📬", en: "Ethio Post",                    am: "የኢትዮ ፖስታ",               desc: "Postal services, package pickup, and courier solutions." },
 ];
 
 // ─── Delay helper for staggered animations ─────────────────────────────────────
@@ -75,8 +58,8 @@ function SlideIn({ children, delay = 0 }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-export default function AboutPage({ lang }) {
-  const [openService, setOpenService] = useState(null);
+export default function AboutPage() {
+  const { lang } = useTranslation();
   const [showTop, setShowTop]       = useState(false);
   const [scrollPct, setScrollPct]   = useState(0);
   const show = (w) => lang === "both" || lang === w;
@@ -283,24 +266,6 @@ export default function AboutPage({ lang }) {
             </FadeIn>
           </div>
         </div>
-      </section>
-    
-      {/* CTA */}
-      <section className="cta-section">
-        <div className="cta-content">
-          {show("en") && <h2 className="cta-title">Ready to access our services?</h2>}
-          {show("am") && <p className="cta-title-am">አገልግሎቶቻችንን ለማግኘት ዝግጁ ነዎት?</p>}
-          <p className="cta-subtitle">Visit the Hawassa MESOB or start online — your time matters.</p>
-          <div className="cta-buttons">
-            <button className="cta-btn-primary">
-              {show("en") && "Visit Us"}{lang === "both" && " · "}{show("am") && "ጎብኙን"}
-            </button>
-            <button className="cta-btn-secondary">
-              {show("en") && "Contact Us"}{lang === "both" && " · "}{show("am") && "ያግኙን"}
-            </button>
-          </div>
-        </div>
-        <div className="cta-bottom-bar" />
       </section>
 
       {/* Back-to-top button */}

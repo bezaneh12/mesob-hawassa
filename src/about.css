@@ -23,8 +23,8 @@
 .about-page {
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  color: #111;
-  background: #fff;
+  color: var(--text-primary);
+  background: var(--bg-primary);
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -34,10 +34,7 @@
   padding: 0;
 }
 
-html.dark-mode .about-page {
-  background: var(--mesob-navy-deep);
-  color: var(--mesob-cream);
-}
+
 
 /* ──────────────────────────────────────────────────────────────────────────────── */
 /* Scroll progress bar */
@@ -376,7 +373,7 @@ html.dark-mode .about-page {
 
 /* Section tones */
 .about-section.tone-default {
-  background: #fff;
+  background: var(--bg-primary);
   border-bottom: 1px solid #e5e7eb;
   transition: background-color 0.4s ease, border-color 0.4s ease;
 }
@@ -386,7 +383,7 @@ html.dark-mode .about-page {
 }
 
 .about-section.tone-default .about-section-title {
-  color: #111;
+  color: var(--text-primary);
 }
 
 html.dark-mode .about-section.tone-default {
@@ -425,7 +422,7 @@ html.dark-mode .about-section.tone-default .about-section-title {
 }
 
 .about-section.tone-cream .about-section-title {
-  color: #111;
+  color: var(--text-primary);
 }
 
 html.dark-mode .about-section.tone-cream {
@@ -511,7 +508,7 @@ html.dark-mode .about-section.tone-cream .about-section-title {
 .stat-card {
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  background: #fff;
+  background: var(--bg-primary);
   padding: 20px 16px;
   text-align: center;
   box-shadow: var(--shadow-card);
@@ -541,22 +538,18 @@ html.dark-mode .stat-card {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #888;
+  color: var(--text-muted);
 }
 
-html.dark-mode .stat-label-en {
-  color: rgba(255, 255, 255, 0.6);
-}
+
 
 .stat-label-am {
   margin-top: 2px;
   font-size: 12px;
-  color: #aaa;
+  color: var(--text-muted);
 }
 
-html.dark-mode .stat-label-am {
-  color: rgba(255, 255, 255, 0.45);
-}
+
 
 /* ──────────────────────────────────────────────────────────────────────────────── */
 /* Who we are section */
@@ -566,27 +559,23 @@ html.dark-mode .stat-label-am {
   max-width: 740px;
   font-size: 15px;
   line-height: 1.8;
-  color: #555;
+  color: var(--text-secondary);
   margin-bottom: 12px;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .who-we-are-text {
-  color: rgba(255, 255, 255, 0.75);
-}
+
 
 .who-we-are-text-am {
   max-width: 740px;
   font-size: 15px;
   line-height: 1.8;
-  color: #666;
+  color: var(--text-muted);
   margin-bottom: 12px;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .who-we-are-text-am {
-  color: rgba(255, 255, 255, 0.6);
-}
+
 
 /* ──────────────────────────────────────────────────────────────────────────────── */
 /* Mission & Vision grid */
@@ -666,7 +655,7 @@ html.dark-mode .who-we-are-text-am {
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  background: #fff;
+  background: var(--bg-primary);
   padding: 24px;
   transition: box-shadow 0.25s, transform 0.25s, background-color 0.4s ease, border-color 0.4s ease;
 }
@@ -704,14 +693,12 @@ html.dark-mode .value-card {
 .value-title {
   font-size: 17px;
   font-weight: 700;
-  color: #111;
+  color: var(--text-primary);
   margin: 0 0 2px;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .value-title {
-  color: var(--mesob-cream);
-}
+
 
 .value-title-am {
   font-size: 13px;
@@ -720,34 +707,28 @@ html.dark-mode .value-title {
   margin: 0 0 8px;
 }
 
-html.dark-mode .value-title-am {
-  color: var(--mesob-gold);
-}
+
 
 .value-text {
   font-size: 14px;
   line-height: 1.7;
-  color: #555;
+  color: var(--text-secondary);
   margin: 0;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .value-text {
-  color: rgba(255, 255, 255, 0.75);
-}
+
 
 .value-text-am {
   font-size: 13px;
   line-height: 1.7;
-  color: #777;
+  color: var(--text-muted);
   margin-top: 6px;
   margin-bottom: 0;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .value-text-am {
-  color: rgba(255, 255, 255, 0.55);
-}
+
 
 /* ──────────────────────────────────────────────────────────────────────────────── */
 /* History timeline */
@@ -797,27 +778,23 @@ html.dark-mode .history-year {
   margin-top: 6px;
   font-size: 15px;
   line-height: 1.75;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 0;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .history-text {
-  color: rgba(255, 255, 255, 0.8);
-}
+
 
 .history-text-am {
   margin-top: 4px;
   font-size: 14px;
   line-height: 1.75;
-  color: #666;
+  color: var(--text-muted);
   margin-bottom: 0;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .history-text-am {
-  color: rgba(255, 255, 255, 0.6);
-}
+
 
 /* ──────────────────────────────────────────────────────────────────────────────── */
 /* Name meaning section */
@@ -832,7 +809,7 @@ html.dark-mode .history-text-am {
 .name-meaning-text {
   font-size: 15px;
   line-height: 1.8;
-  color: #555;
+  color: var(--text-secondary);
   transition: color 0.4s ease;
 }
 
@@ -844,7 +821,7 @@ html.dark-mode .name-meaning-text {
   margin-top: 8px;
   font-size: 14px;
   line-height: 1.8;
-  color: #666;
+  color: var(--text-muted);
   transition: color 0.4s ease;
 }
 
@@ -983,7 +960,7 @@ html.dark-mode .name-meaning-text-am {
 .team-card {
   border-radius: 16px;
   border: 1px solid #e5e7eb;
-  background: #fff;
+  background: var(--bg-primary);
   padding: 24px;
   text-align: center;
   transition: box-shadow 0.25s, transform 0.25s, background-color 0.4s ease, border-color 0.4s ease;
@@ -1016,29 +993,25 @@ html.dark-mode .team-card {
 .team-name {
   font-size: 14px;
   font-weight: 600;
-  color: #111;
+  color: var(--text-primary);
   margin: 0 0 4px;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .team-name {
-  color: var(--mesob-cream);
-}
+
 
 .team-role {
   font-size: 12px;
-  color: #888;
+  color: var(--text-muted);
   margin: 0;
   transition: color 0.4s ease;
 }
 
-html.dark-mode .team-role {
-  color: rgba(255, 255, 255, 0.6);
-}
+
 
 .team-role-am {
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-muted);
   margin: 2px 0 0;
   transition: color 0.4s ease;
 }
