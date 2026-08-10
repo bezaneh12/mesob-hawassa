@@ -174,7 +174,7 @@ function Services() {
 
                       {selectedService.booking_link && (
                         <a
-                          href={selectedService.booking_link}
+                          href={/^https?:\/\//i.test(selectedService.booking_link || "") ? selectedService.booking_link : undefined}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="book-now-button"
