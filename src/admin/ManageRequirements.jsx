@@ -251,7 +251,7 @@ function ManageRequirements() {
     const requirementData = {
       service_id: selectedServiceId,
       requirement: form.requirement.trim(),
-      requirement_am: form.requirement_am,
+      requirement_am: (form.requirement_am || "").trim() || null,
     };
 
     try {
