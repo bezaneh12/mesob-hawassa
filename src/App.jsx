@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import AboutPage from "./AboutPage";
 import NewsPage from "./pages/NewsPage.jsx";
 import AnnouncementsPage from "./pages/AnnouncementsPage";
+import AppointmentPage from "./pages/AppointmentPage";
 import { ThemeProvider } from "./context/ThemeContext";
 import { TranslationProvider } from "./context/TranslationContext";
 import AdminLogin from "./admin/AdminLogin";
@@ -43,6 +44,9 @@ function App() {
             {/* News and announcements */}
             <Route path="/news" element={<NewsPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
+
+            {/* Appointments page */}
+            <Route path="/appointment" element={<AppointmentPage />} />
 
             {/* Admin routes */}
             <Route path="/admin/login" element={<AdminLogin />} />

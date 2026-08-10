@@ -34,3 +34,25 @@ export async function getRequirements(serviceId) {
 
   return data;
 }
+export async function getBookableServices() {
+  const { data, error } = await supabase
+    .from("services")
+    .select(`
+      id, 
+      name, 
+      name_am, 
+      booking_link,
+      institutions (
+        name,
+        name_am,
+        logo_url
+      )
+    `)
+    .not("booking_link", "is", null)
+    .neq("booking_link", "");
+
+  if (error) throw error;
+
+  return data;
+}
+
