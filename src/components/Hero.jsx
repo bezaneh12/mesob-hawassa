@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "../context/TranslationContext";
+import { useTranslation } from "../context/translation-context";
 
 const HERO_SLIDES = [
   {
@@ -27,7 +27,7 @@ const HERO_SLIDES = [
 function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {

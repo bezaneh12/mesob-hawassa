@@ -11,7 +11,5 @@ export async function getInstitutions() {
     throw error;
   }
 
-  console.log("Institutions loaded from Supabase:", data);
-
   return data || [];
 }

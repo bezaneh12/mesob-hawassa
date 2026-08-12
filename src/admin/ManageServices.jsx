@@ -91,8 +91,8 @@ function ManageServices() {
   // INITIAL LOAD
   // ============================================
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (!supabase) {
       setError("Supabase is not configured. Please add your environment variables.");
       setLoadingInstitutions(false);
@@ -100,6 +100,7 @@ function ManageServices() {
     }
 
     loadInstitutions();
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   useEffect(() => {
@@ -120,27 +121,22 @@ function ManageServices() {
   }, []);
 
   // ============================================
-  // WHEN INSTITUTION CHANGES
+  // FORM INPUT
   // ============================================
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => {
-    if (selectedInstitutionId) {
-      loadServices(selectedInstitutionId);
+  // Runs directly from the user's dropdown click, so this updates
+  // services/form state immediately rather than via an effect.
+  function handleInstitutionSelect(institutionId) {
+    setSelectedInstitutionId(institutionId);
+    setIsInstitutionMenuOpen(false);
+
+    if (institutionId) {
+      loadServices(institutionId);
     } else {
       setServices([]);
     }
 
     resetForm();
-  }, [selectedInstitutionId]);
-
-  // ============================================
-  // FORM INPUT
-  // ============================================
-
-  function handleInstitutionSelect(institutionId) {
-    setSelectedInstitutionId(institutionId);
-    setIsInstitutionMenuOpen(false);
   }
 
   function handleChange(event) {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
-import { useTranslation } from "../context/TranslationContext";
+import { useTranslation } from "../context/translation-context";
 import "./Announcement.css";
 
 function AnnouncementCard({ item, lang, t }) {

@@ -1,8 +1,8 @@
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mesobLogo from "../assets/mesoblogo.jpg";
-import { ThemeContext } from "../context/ThemeContext";
-import { useTranslation } from "../context/TranslationContext";
+import { useTheme } from "../context/theme-context";
+import { useTranslation } from "../context/translation-context";
 
 function SunIcon() {
   return (
@@ -51,7 +51,7 @@ function MoonIcon() {
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { isDark, toggleTheme } = useContext(ThemeContext);
+  const { isDark, toggleTheme } = useTheme();
   const { lang, setLang, t } = useTranslation();
 
 

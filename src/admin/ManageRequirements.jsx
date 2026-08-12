@@ -151,45 +151,41 @@ function ManageRequirements() {
   // INITIAL LOAD
   // ==========================================
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadInstitutions();
   }, []);
 
   // ==========================================
-  // WHEN INSTITUTION CHANGES
+  // WHEN INSTITUTION CHANGES (user selection, not an effect)
   // ==========================================
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => {
+  function handleInstitutionSelect(institutionId) {
+    setSelectedInstitutionId(institutionId);
     setSelectedServiceId("");
     setServices([]);
     setRequirements([]);
     resetForm();
 
-    if (selectedInstitutionId) {
-      loadServices(
-        selectedInstitutionId
-      );
+    if (institutionId) {
+      loadServices(institutionId);
     }
-  }, [selectedInstitutionId]);
+  }
 
   // ==========================================
-  // WHEN SERVICE CHANGES
+  // WHEN SERVICE CHANGES (user selection, not an effect)
   // ==========================================
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => {
+  function handleServiceSelect(serviceId) {
+    setSelectedServiceId(serviceId);
     resetForm();
 
-    if (selectedServiceId) {
-      loadRequirements(
-        selectedServiceId
-      );
+    if (serviceId) {
+      loadRequirements(serviceId);
     } else {
       setRequirements([]);
     }
-  }, [selectedServiceId]);
+  }
 
   // ==========================================
   // HANDLE FORM INPUT
@@ -251,33 +247,14 @@ function ManageRequirements() {
     }
 
     setSaving(true);
-        console.log("Form data:", form);
 
-const requirementData = {
-  service_id: selectedServiceId,
-  requirement: form.requirement.trim(),
-  requirement_am: form.requirement_am,
-};
+    const requirementData = {
+      service_id: selectedServiceId,
+      requirement: form.requirement.trim(),
+      requirement_am: form.requirement_am,
+    };
 
-console.log("Requirement data being sent:", requirementData);
     try {
-      const requirementData = {
-  requirement: form.requirement,
-  requirement_am: form.requirement_am,
-};
-
-console.log("Updating:", requirementData);
-
-const { data, error } = await supabase
-  .from("service_requirements")
-  .update(requirementData)
-  .eq("id", editingId)
-  .select();
-
-console.log("Returned row:", data);
-
-if (error) throw error;
-
       // ========================================
       // UPDATE EXISTING REQUIREMENT
       // ========================================
@@ -508,7 +485,7 @@ if (error) throw error;
                 selectedInstitutionId
               }
               onChange={(event) =>
-                setSelectedInstitutionId(
+                handleInstitutionSelect(
                   event.target.value
                 )
               }
@@ -586,7 +563,7 @@ if (error) throw error;
                   selectedServiceId
                 }
                 onChange={(event) =>
-                  setSelectedServiceId(
+                  handleServiceSelect(
                     event.target.value
                   )
                 }

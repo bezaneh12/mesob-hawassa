@@ -1,7 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import { dictionary } from "../locales/dictionary";
-
-export const TranslationContext = createContext();
+import { TranslationContext } from "./translation-context";
 
 export function TranslationProvider({ children }) {
   const [lang, setLang] = useState("en");
@@ -19,12 +18,4 @@ export function TranslationProvider({ children }) {
       {children}
     </TranslationContext.Provider>
   );
-}
-
-export function useTranslation() {
-  const context = useContext(TranslationContext);
-  if (!context) {
-    throw new Error("useTranslation must be used within a TranslationProvider");
-  }
-  return context;
 }

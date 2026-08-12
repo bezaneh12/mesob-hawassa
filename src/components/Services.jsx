@@ -4,7 +4,7 @@ import {
   getServicesByInstitution,
   getRequirements,
 } from "../api/servicesApi";
-import { useTranslation } from "../context/TranslationContext";
+import { useTranslation } from "../context/translation-context";
 
 function Services() {
   const [institutions, setInstitutions] = useState([]);

@@ -1,8 +1,8 @@
 
-import { FaFacebook, FaLinkedin, FaTelegram } from "react-icons/fa";
+import { FaFacebook, FaTelegram } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import mesoblogo from "../assets/mesoblogo.jpg";
-import { useTranslation } from "../context/TranslationContext";
+import { useTranslation } from "../context/translation-context";
 import "./Footer.css";
 
 const Footer = () => {

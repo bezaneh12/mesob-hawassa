@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getInstitutions } from "../api/institutionApi";
-import { useTranslation } from "../context/TranslationContext";
+import { useTranslation } from "../context/translation-context";
 
 function Institutions() {
   const [institutions, setInstitutions] = useState([]);
@@ -67,6 +67,7 @@ function Institutions() {
                       "Failed to load image:",
                       institution.logo_url
                     );
+                    event.target.src = "/city.jpg";
                   }}
                 />
               ) : (

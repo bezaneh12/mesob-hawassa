@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getBookableServices } from "../api/servicesApi";
-import { useTranslation } from "../context/TranslationContext";
+import { useTranslation } from "../context/translation-context";
 import "./Appointment.css";
 
 function AppointmentPage() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { t, lang } = useTranslation();
+  const { lang } = useTranslation();
 
   useEffect(() => {
     async function loadServices() {

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabase";
-import { useTranslation } from "../context/TranslationContext";
+import { useTranslation } from "../context/translation-context";
 import "./news.css";
 
 const PAGE_SIZE = 6; // how many older posts to reveal per "Load more" click
@@ -110,16 +110,23 @@ function ImageCarousel({ images, altText = "", autoSlide = true, interval = 4000
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef(null);
 
+  // Reset to the first slide whenever a different image set is passed in.
+  // Adjusted during render (not an effect) per React's "derived state" pattern,
+  // since refs can't be read/written during render.
+  const [prevImages, setPrevImages] = useState(images);
+  if (prevImages !== images) {
+    setPrevImages(images);
+    if (index !== 0) {
+      setIndex(0);
+    }
+  }
+
   const goTo = useCallback(
     (nextIndex) => {
       setIndex(((nextIndex % images.length) + images.length) % images.length);
     },
     [images.length]
   );
-
-  useEffect(() => {
-    setIndex(0);
-  }, [images]);
 
   useEffect(() => {
     if (!autoSlide || images.length <= 1 || isHovered) return;

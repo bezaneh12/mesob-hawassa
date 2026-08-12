@@ -51,8 +51,10 @@ function ManageAnnouncements() {
     }
   }
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
+    // Initial data load on mount; loadAnnouncements is also reused after
+    // create/update/delete, so it can't be inlined into this effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadAnnouncements();
   }, []);
 
