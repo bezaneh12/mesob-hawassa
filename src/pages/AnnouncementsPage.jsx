@@ -36,7 +36,7 @@ function AnnouncementCard({ item, lang, t }) {
         <div className="announcement-badges">
           {isClosed && (
             <span className="announcement-badge badge-closed">
-              {lang === "am" ? "ተዘግቷል" : "Closed"}
+              {t("closed") || (lang === "am" ? "ተዘግቷል" : "Closed")}
             </span>
           )}
           {isClosingSoon && (

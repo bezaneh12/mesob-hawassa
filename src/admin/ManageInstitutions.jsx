@@ -42,7 +42,6 @@ function ManageInstitutions() {
     setLoading(false);
   }
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     // Initial data load on mount; also handles the "Supabase not configured"
     // guard shown before any environment variables are set.

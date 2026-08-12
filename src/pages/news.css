@@ -275,7 +275,15 @@
 
 }
   
-/* News page styles: carousel/gallery, hero layout, video embeds, and pagination. */
+/* =========================================
+   REPLACE your previous "carousel + modal"
+   additions block with this one. It keeps
+   the carousel/gallery, drops the modal
+   (no longer used), and adds styles for the
+   hero post, inline read-more, video embeds,
+   and load-more pagination.
+   Paste this at the bottom of news.css.
+========================================= */
 
 /* --- General card tweaks --- */
 

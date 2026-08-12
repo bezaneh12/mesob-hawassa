@@ -54,11 +54,9 @@ function AppointmentPage() {
                   
                   <h3 className="bookable-service-name">{serviceName}</h3>
                   
-                  {/^(https?:\/\/)/i.test(service.booking_link || "") && (
-                    <a href={service.booking_link} target="_blank" rel="noopener noreferrer" className="book-now-button">
-                      {lang === 'am' ? 'አሁኑኑ ቀጠሮ ያስይዙ' : 'Book Now'}
-                    </a>
-                  )}
+                  <a href={service.booking_link} target="_blank" rel="noopener noreferrer" className="book-now-button">
+                    {lang === 'am' ? 'አሁኑኑ ቀጠሮ ያስይዙ' : 'Book Now'}
+                  </a>
                 </article>
               );
             })}
